@@ -37,11 +37,11 @@ function App() {
 
     if (chatStatus === 'Chat ongoing' || chatStatus === 'inputting') {
       // Send message request
-      apiEndpoint = 'http://yeyu.life:5008/api/send_message';
+      apiEndpoint = 'http://localhost:5000/api/send_message';
       requestBody = { message: userInput };
     } else {
       // Start chat request
-      apiEndpoint = 'http://yeyu.life:5008/api/start_chat';
+      apiEndpoint = 'http://localhost:5000/api/start_chat';
       requestBody = { ...initialChatRequest, message: userInput }; 
     }
 
@@ -65,7 +65,7 @@ function App() {
   // Function to fetch messages from the backend
   const fetchMessages = async () => {
     try {
-      const response = await fetch('http://yeyu.life:5008/api/get_message');
+      const response = await fetch('http://localhost:5000/api/get_message');
       if (!response.ok) {
         throw new Error('Failed to fetch messages');
       }

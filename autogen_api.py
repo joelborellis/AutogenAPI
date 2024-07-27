@@ -8,6 +8,9 @@ from flask_cors import CORS
 from autogen.agentchat.contrib.gpt_assistant_agent import GPTAssistantAgent
 from autogen.agentchat import AssistantAgent, UserProxyAgent
 import queue
+from dotenv import load_dotenv
+
+load_dotenv()
 
 app = Flask(__name__)
 cors=CORS(app)
@@ -19,7 +22,7 @@ print_queue = queue.Queue()
 user_queue = queue.Queue()
 
 # Replace with your actual OpenAI API key
-os.environ["OPENAI_API_KEY"] = "Your_API_Key" 
+os.environ["OPENAI_API_KEY"] = os.environ.get("OPENAI_API_KEY")
 
 class MyConversableAgent(autogen.ConversableAgent):
     async def a_get_human_input(self, prompt: str) -> str:
@@ -195,4 +198,4 @@ def get_messages():
     
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0', port=5008, debug=True)
+    app.run(host='0.0.0.0', port=5000, debug=True)
